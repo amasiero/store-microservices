@@ -1,7 +1,7 @@
-version: '3.2'
+version: '3.5'
 services:
   database:
-    container_name: microservices
+    container_name: microservices-database
     image: postgres:15
     environment:
       POSTGRES_USER: 'postgres'
@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dev"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 10s
       retries: 20

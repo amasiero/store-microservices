@@ -1,5 +1,6 @@
 package com.andreymasiero.users.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,13 +35,14 @@ public class UserService {
     }
 
     public UserDto save(UserDto userDto) {
+        userDto.setCreatedOn(LocalDate.now());
         User user = userRepository.save(User.from(userDto));
         return UserDto.from(user);
     }
 
     public UserDto delete(Long userId) {
         Optional<User> user = userRepository.findById(userId);
-        user.ifPresent(u -> userRepository.delete(u));
+        user.ifPresent(userRepository::delete);
         return null;
     }
 

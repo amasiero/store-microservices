@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/users/social-id/{socialId}")
-    public UserDto delete(@PathVariable String socialId) {
+    public UserDto findBySocialId(@PathVariable String socialId) {
         return userService.findBySocialId(socialId);
     }
 

@@ -12,9 +12,7 @@ import com.andreymasiero.cart.entities.Cart;
 public class CartDto {
     @NotBlank
     private String userIdentifier;
-    @NotNull
     private Float total;
-    @NotNull
     private LocalDate date;
     @NotNull
     private List<ItemDto> items;

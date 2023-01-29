@@ -80,7 +80,7 @@ public class Product {
         product.setProductIdentifier(productDto.getProductIdentifier());
         product.setPrice(productDto.getPrice());
         if (productDto.getCategoryDto() != null) {
-            Category.from(productDto.getCategoryDto());
+            product.setCategory(Category.from(productDto.getCategoryDto()));
         }
         return product;
     }

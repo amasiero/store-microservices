@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.andreymasiero.products.entities.Product;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductDto {
     @NotBlank
@@ -15,6 +16,7 @@ public class ProductDto {
     @NotNull
     private Float price;
     @NotNull
+    @JsonProperty("category")
     private CategoryDto categoryDto;
 
     public String getName() {

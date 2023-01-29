@@ -6,9 +6,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.andreymasiero.cart.dtos.CartDto;
+import com.andreymasiero.cart.dtos.CartReportDto;
 import com.andreymasiero.cart.dtos.ItemDto;
 import com.andreymasiero.cart.entities.Cart;
 import com.andreymasiero.cart.repositories.CartRepository;
+import com.andreymasiero.cart.repositories.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +60,17 @@ public class CartService {
         cartDto.setDate(LocalDate.now());
         Cart cart = cartRepository.save(Cart.from(cartDto));
         return CartDto.from(cart);
+    }
+
+    public List<CartDto> getCartByFilter(LocalDate begin, LocalDate end, Float minimum) {
+        List<Cart> carts = cartRepository.getShopByFilters(begin, end, minimum);
+        return carts
+            .stream()
+            .map(CartDto::from)
+            .collect(Collectors.toList());
+    }
+
+    public CartReportDto getReportByDate(LocalDate begin, LocalDate end) {
+        return cartRepository.getReportByDate(begin, end);
     }
 }

@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.andreymasiero.products.dtos.ProductDto;
+import com.andreymasiero.dtos.products.ProductDto;
+import com.andreymasiero.products.converters.DtoConverter;
 import com.andreymasiero.products.entities.Product;
 import com.andreymasiero.products.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +26,32 @@ public class ProductService {
     public List<ProductDto> getAll() {
         return productRepository.findAll()
             .stream()
-            .map(ProductDto::from)
+            .map(DtoConverter::fromProduct)
             .collect(Collectors.toList());
     }
 
     public List<ProductDto> getProductByCategoryId(Long categoryId) {
         return productRepository.getProductByCategory(categoryId)
             .stream()
-            .map(ProductDto::from)
+            .map(DtoConverter::fromProduct)
             .collect(Collectors.toList());
     }
 
     public ProductDto findByProductIdentifier(String productIdentifier) {
         Product product = productRepository.findByProductIdentifier(productIdentifier);
-        return product != null ? ProductDto.from(product) : null;
+        return product != null ? DtoConverter.fromProduct(product) : null;
     }
 
     public ProductDto save(ProductDto productDto) {
         Product product = productRepository.save(Product.from(productDto));
-        return ProductDto.from(product);
+        return DtoConverter.fromProduct(product);
     }
 
     public ProductDto delete(Long productId) {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isPresent()) {
             productRepository.delete(product.get());
-            return ProductDto.from(product.get());
+            return DtoConverter.fromProduct(product.get());
         }
         return null;
     }

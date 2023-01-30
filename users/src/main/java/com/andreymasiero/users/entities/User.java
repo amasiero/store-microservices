@@ -8,7 +8,8 @@ import javax.persistence.Id;
 
 import java.time.LocalDate;
 
-import com.andreymasiero.users.dtos.UserDto;
+import com.andreymasiero.dtos.users.UserDto;
+
 
 @Entity
 public class User {

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.andreymasiero.products.dtos.ProductDto;
+import com.andreymasiero.dtos.products.ProductDto;
 
 @Entity(name = "product")
 public class Product {

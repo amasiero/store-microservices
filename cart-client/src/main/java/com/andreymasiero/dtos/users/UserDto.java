@@ -1,8 +1,6 @@
-package com.andreymasiero.users.dtos;
+package com.andreymasiero.dtos.users;
 
 import java.time.LocalDate;
-
-import com.andreymasiero.users.entities.User;
 
 public class UserDto {
     private String name;
@@ -58,16 +56,5 @@ public class UserDto {
 
     public void setCreatedOn(LocalDate createdOn) {
         this.createdOn = createdOn;
-    }
-
-    public static UserDto from(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setName(user.getName());
-        userDto.setSocialId(user.getSocialId());
-        userDto.setAddress(user.getAddress());
-        userDto.setEmail(user.getEmail());
-        userDto.setPhoneNumber(user.getPhoneNumber());
-        userDto.setCreatedOn(user.getCreatedOn());
-        return userDto;
     }
 }

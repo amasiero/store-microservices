@@ -1,13 +1,10 @@
-package com.andreymasiero.cart.dtos;
+package com.andreymasiero.dtos.cart;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import com.andreymasiero.cart.entities.Cart;
 
 public class CartDto {
     @NotBlank
@@ -47,18 +44,5 @@ public class CartDto {
 
     public void setItems(List<ItemDto> items) {
         this.items = items;
-    }
-
-    public static CartDto from(Cart cart) {
-        CartDto cartDto = new CartDto();
-        cartDto.setUserIdentifier(cart.getUserIdentifier());
-        cartDto.setDate(cart.getDate());
-        cartDto.setTotal(cart.getTotal());
-        cartDto.setItems(cart
-            .getItems()
-            .stream()
-            .map(ItemDto::from)
-            .collect(Collectors.toList()));
-        return cartDto;
     }
 }

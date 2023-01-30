@@ -1,8 +1,6 @@
-package com.andreymasiero.products.dtos;
+package com.andreymasiero.dtos.products;
 
 import javax.validation.constraints.NotNull;
-
-import com.andreymasiero.products.entities.Category;
 
 public class CategoryDto {
     @NotNull
@@ -23,12 +21,5 @@ public class CategoryDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public static CategoryDto from(Category category) {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(category.getId());
-        categoryDto.setName(category.getName());
-        return categoryDto;
     }
 }

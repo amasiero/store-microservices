@@ -1,9 +1,8 @@
-package com.andreymasiero.products.dtos;
+package com.andreymasiero.dtos.products;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.andreymasiero.products.entities.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductDto {
@@ -59,15 +58,4 @@ public class ProductDto {
         this.categoryDto = categoryDto;
     }
 
-    public static ProductDto from(Product product) {
-        ProductDto productDto = new ProductDto();
-        productDto.setName(product.getName());
-        productDto.setProductIdentifier(product.getProductIdentifier());
-        productDto.setDescription(product.getDescription());
-        productDto.setPrice(product.getPrice());
-        if (product.getCategory() != null) {
-            productDto.setCategoryDto(CategoryDto.from(product.getCategory()));
-        }
-        return productDto;
-    }
 }

@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.andreymasiero.cart.dtos.CartDto;
+import com.andreymasiero.cart.converters.DtoConverter;
 import com.andreymasiero.cart.dtos.CartReportDto;
-import com.andreymasiero.cart.dtos.ItemDto;
 import com.andreymasiero.cart.entities.Cart;
 import com.andreymasiero.cart.repositories.CartRepository;
-import com.andreymasiero.cart.repositories.ReportRepository;
+import com.andreymasiero.dtos.cart.CartDto;
+import com.andreymasiero.dtos.cart.ItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,27 +28,27 @@ public class CartService {
     public List<CartDto> getAll() {
         return cartRepository.findAll()
             .stream()
-            .map(CartDto::from)
+            .map(DtoConverter::fromCart)
             .collect(Collectors.toList());
     }
 
     public List<CartDto> getByUser(String userIdentifier) {
         return cartRepository.findAllByUserIdentifier(userIdentifier)
             .stream()
-            .map(CartDto::from)
+            .map(DtoConverter::fromCart)
             .collect(Collectors.toList());
     }
 
     public List<CartDto> getByDate(CartDto cartDto) {
         return cartRepository.findAllByDateGreaterThanEqual(cartDto.getDate())
             .stream()
-            .map(CartDto::from)
+            .map(DtoConverter::fromCart)
             .collect(Collectors.toList());
     }
 
     public CartDto findById(Long productId) {
         Optional<Cart> cart = cartRepository.findById(productId);
-        return cart.map(CartDto::from).orElse(null);
+        return cart.map(DtoConverter::fromCart).orElse(null);
     }
 
     public CartDto save(CartDto cartDto) {
@@ -59,14 +59,14 @@ public class CartService {
 
         cartDto.setDate(LocalDate.now());
         Cart cart = cartRepository.save(Cart.from(cartDto));
-        return CartDto.from(cart);
+        return DtoConverter.fromCart(cart);
     }
 
     public List<CartDto> getCartByFilter(LocalDate begin, LocalDate end, Float minimum) {
         List<Cart> carts = cartRepository.getShopByFilters(begin, end, minimum);
         return carts
             .stream()
-            .map(CartDto::from)
+            .map(DtoConverter::fromCart)
             .collect(Collectors.toList());
     }
 

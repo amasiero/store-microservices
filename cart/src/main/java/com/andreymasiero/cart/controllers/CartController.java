@@ -5,9 +5,9 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.andreymasiero.cart.dtos.CartDto;
 import com.andreymasiero.cart.dtos.CartReportDto;
 import com.andreymasiero.cart.services.CartService;
+import com.andreymasiero.dtos.cart.CartDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;

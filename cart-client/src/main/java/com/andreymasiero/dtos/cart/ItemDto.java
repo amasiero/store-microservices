@@ -1,9 +1,7 @@
-package com.andreymasiero.cart.dtos;
+package com.andreymasiero.dtos.cart;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.andreymasiero.cart.entities.Item;
 
 public class ItemDto {
 
@@ -26,12 +24,5 @@ public class ItemDto {
 
     public void setPrice(Float price) {
         this.price = price;
-    }
-
-    public static ItemDto from(Item item) {
-        ItemDto itemDto = new ItemDto();
-        itemDto.setProductIdentifier(item.getProductIdentifier());
-        itemDto.setPrice(item.getPrice());
-        return itemDto;
     }
 }

@@ -14,7 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.andreymasiero.cart.dtos.CartDto;
+import com.andreymasiero.dtos.cart.CartDto;
+
 
 @Entity(name = "cart")
 public class Cart {

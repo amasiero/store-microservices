@@ -3,7 +3,7 @@ package com.andreymasiero.cart.entities;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import com.andreymasiero.cart.dtos.ItemDto;
+import com.andreymasiero.dtos.cart.ItemDto;
 
 @Embeddable
 public class Item {

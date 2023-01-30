@@ -1,0 +1,5 @@
+com/andreymasiero/dtos/products/ProductDto.class
+com/andreymasiero/dtos/cart/ItemDto.class
+com/andreymasiero/dtos/cart/CartDto.class
+com/andreymasiero/dtos/products/CategoryDto.class
+com/andreymasiero/dtos/users/UserDto.class

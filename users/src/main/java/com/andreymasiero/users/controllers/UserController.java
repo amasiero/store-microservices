@@ -2,7 +2,7 @@ package com.andreymasiero.users.controllers;
 
 import java.util.List;
 
-import com.andreymasiero.users.dtos.UserDto;
+import com.andreymasiero.dtos.users.UserDto;
 import com.andreymasiero.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -18,6 +18,12 @@ cart-api/.settings/
 cart-api/target/
 cart-api/.idea
 
+cart-client/.classpath
+cart-client/.project
+cart-client/.settings/
+cart-client/target/
+cart-client/.idea
+
 /.metadata/
 
 *.iml

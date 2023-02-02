@@ -11,18 +11,25 @@ import com.andreymasiero.cart.entities.Cart;
 import com.andreymasiero.cart.repositories.CartRepository;
 import com.andreymasiero.dtos.cart.CartDto;
 import com.andreymasiero.dtos.cart.ItemDto;
+import com.andreymasiero.dtos.products.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CartService {
     private final CartRepository cartRepository;
+    private final ProductService productService;
+    private final UserService userService;
 
     @Autowired
     public CartService(
-        final CartRepository cartRepository
+        final CartRepository cartRepository,
+        final ProductService productService,
+        final UserService userService
     ) {
         this.cartRepository = cartRepository;
+        this.productService = productService;
+        this.userService = userService;
     }
 
     public List<CartDto> getAll() {
@@ -52,6 +59,14 @@ public class CartService {
     }
 
     public CartDto save(CartDto cartDto) {
+        if (userService.getUserBySocialId(cartDto.getUserIdentifier()) == null) {
+            return null;
+        }
+
+        if (!validateProducts(cartDto.getItems())) {
+            return null;
+        }
+
         cartDto.setTotal(cartDto.getItems()
             .stream()
             .map(ItemDto::getPrice)
@@ -60,6 +75,18 @@ public class CartService {
         cartDto.setDate(LocalDate.now());
         Cart cart = cartRepository.save(Cart.from(cartDto));
         return DtoConverter.fromCart(cart);
+    }
+
+    private boolean validateProducts(List<ItemDto> items) {
+        for(ItemDto item : items) {
+            ProductDto productDto = productService
+                .getProductByIdentifier(item.getProductIdentifier());
+            if (productDto == null) {
+                return false;
+            }
+            item.setPrice(productDto.getPrice());
+        }
+        return true;
     }
 
     public List<CartDto> getCartByFilter(LocalDate begin, LocalDate end, Float minimum) {

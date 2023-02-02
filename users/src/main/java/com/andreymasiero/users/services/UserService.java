@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.andreymasiero.dtos.users.UserDto;
+import com.andreymasiero.exceptions.users.UserNotFoundException;
 import com.andreymasiero.users.converters.DtoConverter;
 import com.andreymasiero.users.entities.User;
 import com.andreymasiero.users.repositories.UserRepository;
@@ -48,8 +49,8 @@ public class UserService {
     }
 
     public UserDto findBySocialId(String socialId) {
-        User user = userRepository.findBySocialId(socialId);
-        return user != null ? DtoConverter.fromUser(user) : null;
+        Optional<User> user = userRepository.findBySocialId(socialId);
+        return user.map(DtoConverter::fromUser).orElseThrow(UserNotFoundException::new);
     }
 
     public List<UserDto> queryByName(String name) {

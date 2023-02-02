@@ -5,8 +5,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.andreymasiero.dtos.products.ProductDto;
+import com.andreymasiero.exceptions.products.CategoryNotFoundException;
+import com.andreymasiero.exceptions.products.ProductNotFoundException;
 import com.andreymasiero.products.converters.DtoConverter;
 import com.andreymasiero.products.entities.Product;
+import com.andreymasiero.products.repositories.CategoryRepository;
 import com.andreymasiero.products.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +18,15 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
     public ProductService(
-        final ProductRepository productRepository
+        final ProductRepository productRepository,
+        final CategoryRepository categoryRepository
     ) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<ProductDto> getAll() {
@@ -38,21 +44,25 @@ public class ProductService {
     }
 
     public ProductDto findByProductIdentifier(String productIdentifier) {
-        Product product = productRepository.findByProductIdentifier(productIdentifier);
-        return product != null ? DtoConverter.fromProduct(product) : null;
+        Optional<Product> product = productRepository.findByProductIdentifier(productIdentifier);
+        return product.map(DtoConverter::fromProduct).orElseThrow(ProductNotFoundException::new);
     }
 
     public ProductDto save(ProductDto productDto) {
+        boolean existsCategory = categoryRepository
+            .existsById(productDto.getCategoryDto().getId());
+        if (!existsCategory) {
+            throw new CategoryNotFoundException();
+        }
         Product product = productRepository.save(Product.from(productDto));
         return DtoConverter.fromProduct(product);
     }
 
     public ProductDto delete(Long productId) {
         Optional<Product> product = productRepository.findById(productId);
-        if (product.isPresent()) {
-            productRepository.delete(product.get());
-            return DtoConverter.fromProduct(product.get());
-        }
-        return null;
+        return product.map(p -> {
+            productRepository.delete(p);
+            return DtoConverter.fromProduct(p);
+        }).orElseThrow(ProductNotFoundException::new);
     }
 }

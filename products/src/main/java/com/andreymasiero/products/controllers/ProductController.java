@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import com.andreymasiero.dtos.products.ProductDto;
-import com.andreymasiero.products.exceptions.ProductNotFoundException;
+import com.andreymasiero.exceptions.products.ProductNotFoundException;
 import com.andreymasiero.products.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

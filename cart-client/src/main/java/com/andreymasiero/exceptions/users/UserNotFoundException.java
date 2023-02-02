@@ -1,2 +1,4 @@
-package com.andreymasiero.exceptions.users;public class UserNotFoundException {
+package com.andreymasiero.exceptions.users;
+
+public class UserNotFoundException extends RuntimeException {
 }

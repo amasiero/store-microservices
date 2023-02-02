@@ -1,6 +1,7 @@
 package com.andreymasiero.products.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.andreymasiero.products.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
         + "where c.id = :categoryId")
     List<Product> getProductByCategory(@Param("categoryId") Long categoryId);
 
-    Product findByProductIdentifier(String productIdentifier);
+    Optional<Product> findByProductIdentifier(String productIdentifier);
 }

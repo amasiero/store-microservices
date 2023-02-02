@@ -1,5 +1,10 @@
+/Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/exceptions/users/UserNotFoundException.java
+/Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/exceptions/users/UserControllerAdvice.java
 /Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/dtos/cart/ItemDto.java
+/Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/exceptions/products/ProductNotFoundException.java
+/Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/dtos/error/ErrorDto.java
 /Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/dtos/users/UserDto.java
 /Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/dtos/cart/CartDto.java
+/Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/exceptions/products/CategoryNotFoundException.java
 /Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/dtos/products/CategoryDto.java
 /Users/andreymasiero/git/personal/microservices-workshop/cart-client/src/main/java/com/andreymasiero/dtos/products/ProductDto.java

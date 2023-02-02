@@ -1,2 +1,4 @@
-package com.andreymasiero.exceptions.products;public class ProductNotFoundException {
+package com.andreymasiero.exceptions.products;
+
+public class ProductNotFoundException extends RuntimeException {
 }

@@ -1,5 +1,10 @@
-com/andreymasiero/dtos/products/ProductDto.class
-com/andreymasiero/dtos/cart/ItemDto.class
+com/andreymasiero/exceptions/users/UserNotFoundException.class
+com/andreymasiero/exceptions/products/CategoryNotFoundException.class
 com/andreymasiero/dtos/cart/CartDto.class
 com/andreymasiero/dtos/products/CategoryDto.class
 com/andreymasiero/dtos/users/UserDto.class
+com/andreymasiero/dtos/products/ProductDto.class
+com/andreymasiero/dtos/cart/ItemDto.class
+com/andreymasiero/exceptions/products/ProductNotFoundException.class
+com/andreymasiero/exceptions/users/UserControllerAdvice.class
+com/andreymasiero/dtos/error/ErrorDto.class

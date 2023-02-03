@@ -10,14 +10,18 @@ import com.andreymasiero.cart.services.CartService;
 import com.andreymasiero.dtos.cart.CartDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/cart")
 public class CartController {
     private final CartService cartService;
 
@@ -28,28 +32,32 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping("/cart")
-    public List<CartDto> getCarts() {
-        return cartService.getAll();
+    @GetMapping
+    public ResponseEntity<List<CartDto>> getCarts() {
+        List<CartDto> carts = cartService.getAll();
+        return new ResponseEntity<>(carts, HttpStatus.OK);
     }
 
-    @GetMapping("/cart/by-user/{userIdentifier}")
-    public List<CartDto> getCarts(@PathVariable String userIdentifier) {
-        return cartService.getByUser(userIdentifier);
+    @GetMapping("/by-user/{userIdentifier}")
+    public ResponseEntity<List<CartDto>> getCarts(@PathVariable String userIdentifier) {
+        List<CartDto> carts = cartService.getByUser(userIdentifier);
+        return new ResponseEntity<>(carts, HttpStatus.OK);
     }
 
-    @GetMapping("/cart/by-date")
-    public List<CartDto> getCarts(@RequestBody CartDto cartDto) {
-        return cartService.getByDate(cartDto);
+    @GetMapping("/by-date")
+    public ResponseEntity<List<CartDto>> getCarts(@RequestBody CartDto cartDto) {
+        List<CartDto> carts = cartService.getByDate(cartDto);
+        return new ResponseEntity<>(carts, HttpStatus.OK);
     }
 
-    @GetMapping("/cart/{id}")
-    public CartDto findById(@PathVariable Long id) {
-        return cartService.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<CartDto> findById(@PathVariable Long id) {
+        CartDto cart = cartService.findById(id);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    @GetMapping("/cart/search")
-    public List<CartDto> getCartsByFilter(
+    @GetMapping("/search")
+    public ResponseEntity<List<CartDto>> getCartsByFilter(
         @RequestParam(name = "begin")
         @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate begin,
@@ -59,11 +67,12 @@ public class CartController {
         @RequestParam(name = "minimum", required = false)
         Float minimum
     ) {
-      return cartService.getCartByFilter(begin, end, minimum);
+      List<CartDto> carts = cartService.getCartByFilter(begin, end, minimum);
+      return new ResponseEntity<>(carts, HttpStatus.OK);
     }
 
-    @GetMapping("/cart/report")
-    public CartReportDto getReportByDate(
+    @GetMapping("/report")
+    public ResponseEntity<CartReportDto> getReportByDate(
         @RequestParam(name = "begin")
         @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate begin,
@@ -71,11 +80,13 @@ public class CartController {
         @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate end
     ) {
-        return cartService.getReportByDate(begin, end);
+        CartReportDto report = cartService.getReportByDate(begin, end);
+        return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
-    @PostMapping("/cart")
-    public CartDto save(@Valid @RequestBody CartDto cartDto) {
-        return cartService.save(cartDto);
+    @PostMapping
+    public ResponseEntity<CartDto> save(@Valid @RequestBody CartDto cartDto) {
+        CartDto cart = cartService.save(cartDto);
+        return new ResponseEntity<>(cart, HttpStatus.CREATED);
     }
 }

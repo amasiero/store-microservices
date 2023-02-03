@@ -10,11 +10,12 @@
 	</parent>
 	<groupId>com.andreymasiero</groupId>
 	<artifactId>cart</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>cart-api</name>
 	<description>microservices project for cart</description>
 	<properties>
 		<java.version>17</java.version>
+		<docker.image.prefix>store</docker.image.prefix>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -55,6 +56,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.9</version>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

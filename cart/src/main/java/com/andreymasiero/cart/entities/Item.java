@@ -1,7 +1,7 @@
 package com.andreymasiero.cart.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 import com.andreymasiero.dtos.cart.ItemDto;
 
